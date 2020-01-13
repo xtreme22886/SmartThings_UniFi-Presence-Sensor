@@ -226,7 +226,6 @@ def addDevice(List toAdd) {
             def mac = it.replaceAll(".*\\(|\\).*", "")
             def dni = "unifi-" + mac
             def name = it
-            log.debug "Adding: ${dth} + ${name} + ${dni} + ${getLocationID()}"
             addChildDevice("xtreme22886", dth, dni, getLocationID(), ["label": name])    
          }
     }
