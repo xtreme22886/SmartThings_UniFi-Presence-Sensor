@@ -1,6 +1,6 @@
 # SmartThings <-> Unifi Presence Sensor
 
-Integration for SmartThings to use wireless Unifi clients as presence sensors
+**Integration for SmartThings to use wireless Unifi clients as presence sensors**
 
 This will allow you to select from a list of known Unifi wireless clients to monitor their presence. By selecting a device(s) to monitor, a script will run every 5 seconds to check the Unifi controller's current status of the monitored device(s). If the device's `last_seen` time is greater than 30 seconds then the device is reported offline. A device is "offline" when it is not connected to an Unifi wireless network.
 
