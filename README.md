@@ -16,7 +16,7 @@ Here are the things that we will need to install / configure
 
 ```
 - Unifi Bridge (REST API server to facilitate communication bwteen SmartThings and the Unifi Controller)
-  - (This can be installed from [here](https://github.com/xtreme22886/SmartThings_Unifi-Presence-REST))
+  - (This can be installed from https://github.com/xtreme22886/SmartThings_Unifi-Presence-REST)
 - Unifi Wireless Presence (SmartThings SmartApp)
 - Unifi Presence Sensor (SmartThings Device Handler)
 ```
