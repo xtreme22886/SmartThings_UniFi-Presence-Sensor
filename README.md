@@ -33,49 +33,32 @@ There are two ways you can install the SmartThings SmartApp and Device Handler.
 
 Instead of describing the two methods of installation here, I'm going to refer you to the documentation for installing the [SmartThings Community Installer](http://thingsthataresmart.wiki/index.php?title=Community_Installer_(Free_Marketplace)) as it's well laid out. You will need to be familiar with "Installation" section, specifically installing from code, installing from GitHub and OAuth setup.
 
-```
-Give the example
-```
+Setup Steps:
+1. Install SmartApp
+   - Make sure to `Publish` and **enabled** `OAuth` for this app
+2. Install Device Handler
+   - Make sure to `Publish` this device handler
+3. In the **SmartThings Classic** mobile app
+   - Automation > SmartApps > Add a SmartApp
+   - My Apps > Unifi Wireless Presence
+   - Enter in information for **Bridge Address**, **Unifi Controller Address**, **Unifi Controller Username**, **Unifi Controller Password** and **Unifi Controller Site**
+4. Click **Save** all the way out of the SmartApp
+   
+**NOTE:** The **Unifi Controller Site** is **NOT** the *name* of the site but rather the *id* of the site. Take "https://10.10.10.60:8443/manage/site/default/dashboard" as an example; the *site id* is what is listed directly after **/site/**. In this cause, it would be **default**.
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+After setup has been completed we can begin to monitor devices
+1. Go back into the SmartApp
+2. Click on **Unifi Client List**
+3. Wait 5 seconds for the list of wireless clients to refresh and populate
+4. Click on `Tap to select`
+5. Select the device(s) you want to monitor
+6. Click **Save** all the way out of the SmartApp
+7. Go back to your list of *Things* and locate the new presence device that was created
+   - Feel free to rename this device as needed
+   
+**Notes:**
+- Anytime you add/remove devices to be monitored, the SmartApp with add/remove the associated *thing*
 
 ## Built With
 
 * [FastAPI](https://fastapi.tiangolo.com/) - Web framework for building APIs
-
-
-To get started:
-
-- You will need to be running the Docker image located here (https://github.com/xtreme22886/SmartThings_Unifi-Presence-REST). This is the Unifi Bridge that will act as the middle man between SmartThings and the Unifi Controller.
-- Install the Unifi Wireless Presence SmartApp into the SmartThings IDE
--- Be sure to enable OAuth for this app. Publish the app.
-- Install the Unifi Presence Sensor Device Handler into the SmartThings IDE
--- Publish the device handler
-- Configure the Unifi Wireless Presence SmartApp and click Save
-- Go back into the Unifi Wireless Presence SmartApp and select which wireless clients you want to monitor
