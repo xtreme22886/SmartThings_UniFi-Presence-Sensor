@@ -20,10 +20,11 @@ definition(
     author: "xtreme",
     description: "Use Unifi wireless clients as presence sensor",
     category: "My Apps",
-    singleInstance: true,
+    //singleInstance: true,
     iconUrl: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg",
     iconX2Url: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg",
-    iconX3Url: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg")
+    iconX3Url: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg"),
+    oauth: true
 
 
 preferences {
