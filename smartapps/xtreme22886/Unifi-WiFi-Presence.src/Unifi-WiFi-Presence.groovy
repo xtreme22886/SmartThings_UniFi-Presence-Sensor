@@ -15,7 +15,7 @@
  */
 
 definition(
-    name: "Unifi-WiFi-Presence",
+    name: "Unifi WiFi Presence",
     namespace: "xtreme22886",
     author: "xtreme",
     description: "Use Unifi wireless clients as presence sensor",
