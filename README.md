@@ -44,7 +44,7 @@ Setup Steps:
    - Enter in information for **Bridge Address**, **Unifi Controller Address**, **Unifi Controller Username**, **Unifi Controller Password** and **Unifi Controller Site**
 4. Click **Save** all the way out of the SmartApp
    
-**NOTE:** The **Unifi Controller Site** is **NOT** the *name* of the site but rather the *id* of the site. Take "https://10.10.10.60:8443/manage/site/default/dashboard" as an example; the *site id* is what is listed directly after **/site/**. In this cause, it would be **default**.
+**NOTE:** The **Unifi Controller Site** is **NOT** the *name* of the site but rather the *id* of the site. Take "https://x.x.x.x:8443/manage/site/default/dashboard" as an example; the *site id* is what is listed directly after **/site/**. In this cause, it would be **default**.
 
 After setup has been completed we can begin to monitor devices
 1. Go back into the SmartApp
