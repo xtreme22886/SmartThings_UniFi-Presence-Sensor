@@ -33,8 +33,8 @@ preferences {
 
 def mainPage() {
     dynamicPage(name: "mainPage", title: "", nextPage: null, uninstall: true, install: true) {
-   		section(""){
-        	input "bridgeAddress", "string", title: "Bridge Address", required: true, description:"ex: 192.168.0.100:30000"
+   	section(""){
+            input "bridgeAddress", "string", title: "Bridge Address", required: true, description:"ex: 192.168.0.100:30000"
             input "unifiAddress", "string", title: "Unifi Controller Address", required: true, description:"ex: 192.168.0.100:8443"
             input "unifiUsername", "string", title: "Unifi Controller Username", required: true, description:"Username for the Unifi Controller"
             input "unifiPassword", "string", title: "Unifi Controller Password", required: true, description:"Password for the Unifi Controller"
@@ -46,26 +46,26 @@ def mainPage() {
           	href "unifiClientsPage", title: "Unifi Client List", description:""
        	}
         
-       	section() {
-            paragraph "View this SmartApp's configuration to use it in other places"
-            href url:"${apiServerUrl("/api/smartapps/installations/${app.id}/config?access_token=${state.accessToken}")}", style:"embedded", required:false, title:"Config", description:"Tap, select, copy, then click back"
-       	}
+       	//section() {
+            //paragraph "View this SmartApp's configuration to use it in other places"
+            //href url:"${apiServerUrl("/api/smartapps/installations/${app.id}/config?access_token=${state.accessToken}")}", style:"embedded", required:false, title:"Config", description:"Tap, select, copy, then click back"
+       	//}
     }
 }
 
 def installed() {
-	log.debug "Installed with settings: ${settings}"
+    log.debug "Installed with settings: ${settings}"
     
     if (!state.accessToken) {
         createAccessToken()
     }
 
-	initialize()
+    initialize()
 }
 
 def updated() {
-	log.debug "Updated with settings: ${settings}"
-	initialize()
+    log.debug "Updated with settings: ${settings}"
+    initialize()
     
     if(state.monitored) {
         def oldList = state.monitored
@@ -74,38 +74,37 @@ def updated() {
         log.debug "New list: ${newList}"
         def toAdd = null
         def toDelete = null
-        if(newList) {
+        if (newList) {
             toAdd = newList - oldList
             toDelete = oldList - newList
-            if(toAdd) {
+            if (toAdd) {
                 addDevice(toAdd)
             }
-            if(toDelete) {
+            if (toDelete) {
                 deleteDevice(toDelete)
             }
-        }
-        else {
+        } else {
             deleteDevice(oldList)
         }
         state.monitored = newList
-    }
-    else{
+    } else {
         state.monitored = toMonitor
-        if(toMonitor) {
+        if (toMonitor) {
             addDevice(toMonitor)
         }
     }
+	
     sendToUnifiConnector()
 }
 
 def initialize() {
-	log.debug "initialize"
+    log.debug "initialize"
     
     def options = [
      	"method": "POST",
         "path": "/settings",
         "headers": [
-        	"HOST": settings.bridgeAddress,
+            "HOST": settings.bridgeAddress,
             "Content-Type": "application/json"
         ],
         "body":[
@@ -124,13 +123,13 @@ def initialize() {
 }
 
 def unifiClientsPage() {
-	log.debug "Getting list of Unifi wireless clients"
+    log.debug "Getting list of Unifi wireless clients"
     
     def options = [
      	"method": "GET",
         "path": "/wificlients",
         "headers": [
-        	"HOST": settings.bridgeAddress,
+            "HOST": settings.bridgeAddress,
             "Content-Type": "application/json"
         ]
     ]
@@ -145,25 +144,25 @@ def unifiClientsPage() {
     }
 }
 
-def parseClients(physicalgraph.device.HubResponse hubResponse) {
+    def parseClients(physicalgraph.device.HubResponse hubResponse) {
     def msg = parseLanMessage(hubResponse.description)
     state.unifiClients = new groovy.json.JsonSlurper().parseText(msg.body)
 }
 
 def getLocationID() {
-	def locationID = null
+    def locationID = null
     try{ locationID = location.hubs[0].id }catch(err){}
     return locationID
 }
 
 def sendToUnifiConnector() {
-	log.debug "Telling the Unifi Connector to monitor the following device(s): ${toMonitor}"
+    log.debug "Telling the Unifi Connector to monitor the following device(s): ${toMonitor}"
        
     def options = [
      	"method": "POST",
         "path": "/monitor",
         "headers": [
-        	"HOST": settings.bridgeAddress,
+            "HOST": settings.bridgeAddress,
             "Content-Type": "application/json"
         ],
         "body": ["toMonitor": toMonitor]
@@ -193,7 +192,7 @@ def renderConfig() {
 
 def getDeviceList() {
     log.debug "List device(s): ${toAdd}"
-	def list = getChildDevices();
+    def list = getChildDevices();
     def resultList = [];
     list.each { child ->
         log.debug "child device id $child.deviceNetworkId with label $child.label"
@@ -211,6 +210,7 @@ def updateDevice() {
         def chlid = getChildDevice(device.id)
         chlid.setPresence(device.present)
     }
+	
     def resultString = new groovy.json.JsonOutput().toJson("result":"success")
     render contentType: "application/json", data: resultString
 }
@@ -218,7 +218,7 @@ def updateDevice() {
 def addDevice(List toAdd) {
     log.debug "Adding device(s): ${toAdd}"
     def chlid = getChildDevice(dni)
-    if(!child){
+    if (!child){
         def dth = "Unifi Presence Sensor"
         toAdd.each{
             def mac = it.replaceAll(".*\\(|\\).*", "")
@@ -233,7 +233,7 @@ def addDevice(List toAdd) {
 def deleteDevice(List toDelete) {
     log.debug "Deleting device(s): ${toDelete}"
     def chlid = getChildDevice(dni)
-    if(!child) {
+    if (!child) {
         toDelete.each{
             def mac = it.replaceAll(".*\\(|\\).*", "")
             def dni = "unifi-" + mac
@@ -245,6 +245,6 @@ def deleteDevice(List toDelete) {
 
 mappings {
     path("/config")                         { action: [GET: "renderConfig"]  }
-    path("/list")                         	{ action: [GET: "getDeviceList"]  }
+    path("/list")                           { action: [GET: "getDeviceList"]  }
     path("/update")                         { action: [POST: "updateDevice"]  }
 }
