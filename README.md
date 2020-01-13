@@ -20,6 +20,7 @@ Here are the things that we will need to install / configure
 - Unifi Presence Sensor (SmartThings Device Handler)
 
 ### Installing SmartApp and Device Handler
+
 **First things first. Get the Unifi Bridge up and running before proceeding**
 
 There are two ways you can install the SmartThings SmartApp and Device Handler.
