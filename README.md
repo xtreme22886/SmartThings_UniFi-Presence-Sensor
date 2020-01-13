@@ -8,7 +8,7 @@ This will allow you to select from a list of known Unifi wireless clients to mon
 
 ## Getting Started
 
-These instructions will help you get this solution implemented. We are going to assume a working local Unifi Controller already exist on the network.
+These instructions will help you get this solution implemented. I'm going to assume a working local Unifi Controller already exist on the network.
 
 ### What are we going to be setting up / installing
 
@@ -21,6 +21,9 @@ Here are the things that we will need to install / configure
 
 ### Installing
 
+**First things first. Get the Unifi Bridge up and running before proceeding**
+
+## Installing SmartApp and Device Handler
 There are two ways you can install the SmartThings SmartApp and Device Handler.
 1. VIA the SmartThings IDE GitHub integration
    - Owner = xtreme22886
