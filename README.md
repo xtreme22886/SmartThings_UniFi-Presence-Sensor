@@ -27,6 +27,8 @@ There are two ways you can install the SmartThings SmartApp and Device Handler.
    - Name = SmartThings_Unifi-Presence-Sensor
    - Branch = master
 2. VIA copying / pasting the code in the SmartThinge IDE
+   - SmartApp = unifi-wireless-presence.groovy
+   - Device Handler = unifi-presence-sensor.groovy
 
 Instead of describing the two methods of installtion here, I'm going to refer you to the documentation for installing the [SmartThings Community Installer](http://thingsthataresmart.wiki/index.php?title=Community_Installer_(Free_Marketplace)) as it's well laid out. You will need to be familiar with "Installation" section, specifically installing from code, installing from GitHub and OAuth setup.
 
