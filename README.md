@@ -9,7 +9,7 @@ Once you have selected which devices you want to monitor, the SmartThings SmartA
 
 To get started:
 
-- You will need to be running the Docker container located here (). This is the Unifi Bridge that will act as the middle man between SmartThings and the Unifi Controller.
+- You will need to be running the Docker container located here (https://github.com/xtreme22886/SmartThings_Unifi-Presence-REST). This is the Unifi Bridge that will act as the middle man between SmartThings and the Unifi Controller.
 - Install the Unifi Wireless Presence SmartApp into the SmartThings IDE
 -- Be sure to enable OAuth for this app. Publish the app.
 - Install the Unifi Presence Sensor Device Handler into the SmartThings IDE
