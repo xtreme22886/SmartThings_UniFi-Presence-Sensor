@@ -96,7 +96,7 @@ def updated() {
         }
     }
 	
-    sendToUnifiConnector()
+    sendToUnifiBridge()
 }
 
 def initialize() {
@@ -157,8 +157,8 @@ def getLocationID() {
     return locationID
 }
 
-def sendToUnifiConnector() {
-    log.debug "Telling the Unifi Connector to monitor the following device(s): ${toMonitor}"
+def sendToUnifiBridge() {
+    log.debug "Telling the Unifi Bridge to monitor the following device(s): ${toMonitor}"
        
     def options = [
      	"method": "POST",
@@ -176,11 +176,11 @@ def sendToUnifiConnector() {
 
 def renderConfig() {
     def configJson = new groovy.json.JsonOutput().toJson([
-        description: "Unifi Connector API",
+        description: "Unifi Bridge API",
         platforms: [
             [
-                platform: "SmartThings Unifi Connector",
-                name: "Unifi Connector",
+                platform: "SmartThings Unifi Bridge",
+                name: "Unifi Bridge",
                 app_url: apiServerUrl("/api/smartapps/installations/"),
                 app_id: app.id,
                 access_token: state.accessToken
