@@ -46,7 +46,7 @@ Setup Steps:
    
 **NOTE:** The **Unifi Controller Site** is **NOT** the *name* of the site but rather the *id* of the site. Take "https://x.x.x.x:8443/manage/site/default/dashboard" as an example; the *site id* is what is listed directly after **/site/**. In this cause, it would be **default**.
 
-After setup has been completed we can begin to monitor devices
+After setup has been completed, we can begin to monitor device(s)
 1. Go back into the SmartApp
 2. Click on **Unifi Client List**
 3. Wait 5 seconds for the list of wireless clients to refresh and populate
