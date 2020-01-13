@@ -58,7 +58,3 @@ After setup has been completed, we can begin to monitor device(s)
    
 **Notes:**
 - Anytime you add/remove devices to be monitored, the SmartApp with add/remove the associated *thing*
-
-## Built With
-
-* [FastAPI](https://fastapi.tiangolo.com/) - Web framework for building APIs
