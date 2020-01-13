@@ -15,4 +15,4 @@ To get started:
 - Install the Unifi Presence Sensor Device Handler into the SmartThings IDE
 -- Publish the device handler
 - Configure the Unifi Wireless Presence SmartApp and click Save
-- Go back into the Unifi Wireless Presence SmartApp and select which wireless clients you wnat to monitor
+- Go back into the Unifi Wireless Presence SmartApp and select which wireless clients you want to monitor
