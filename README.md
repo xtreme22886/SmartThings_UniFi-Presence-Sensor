@@ -11,6 +11,8 @@ To get started:
 
 - You will need to be running the Docker container located here (). This is the Unifi Bridge that will act as the middle man between SmartThings and the Unifi Controller.
 - Install the Unifi Wireless Presence SmartApp into the SmartThings IDE
+-- Be sure to enable OAuth for this app. Publish the app.
 - Install the Unifi Presence Sensor Device Handler into the SmartThings IDE
+-- Publish the device handler
 - Configure the Unifi Wireless Presence SmartApp and click Save
 - Go back into the Unifi Wireless Presence SmartApp and select which wireless clients you wnat to monitor
