@@ -239,7 +239,6 @@ def deleteDevice(List toDelete) {
         toDelete.each{
             def mac = it.replaceAll(".*\\(|\\).*", "")
             def dni = "unifi-" + mac
-            log.debug "Deleting: ${dni}"
             deleteChildDevice(dni)
          }
     }
