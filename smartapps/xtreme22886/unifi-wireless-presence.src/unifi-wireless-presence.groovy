@@ -208,7 +208,7 @@ def getDeviceList() {
 
 def updateDevice() {
     def body = request.JSON
-    log.debug "Received the following presence updates: ${body.update}"
+    log.debug "Received the following presence update(s): ${body.update}"
     body.update.each { device ->
         def chlid = getChildDevice(device.id)
         chlid.setPresence(device.present)
