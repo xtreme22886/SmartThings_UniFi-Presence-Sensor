@@ -58,3 +58,6 @@ After setup has been completed, we can begin to monitor device(s)
    
 **Notes:**
 - Anytime you add/remove devices to be monitored, the SmartApp with add/remove the associated *thing*
+
+### Donate
+[PayPal.me](paypal.me/xtreme22886)
