@@ -66,8 +66,10 @@ def installed() {
 }
 
 def updated() {
-    log.debug "Updated with settings: ${settings}"
     initialize()
+
+    settings.unifiPassword = "<password>"
+    log.debug "Updated with settings: ${settings}"
     
     if(state.monitored) {
         def oldList = state.monitored
@@ -95,7 +97,7 @@ def updated() {
             addDevice(toMonitor)
         }
     }
-	
+
     sendToUnifiBridge()
 }
 
