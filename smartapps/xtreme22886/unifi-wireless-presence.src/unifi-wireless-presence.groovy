@@ -1,5 +1,5 @@
 /**
- *  Unifi WiFi Presence
+ *  UniFi WiFi Presence
  *
  *  Copyright 2020 xtreme
  *
@@ -15,10 +15,10 @@
  */
 
 definition(
-    name: "Unifi Wireless Presence",
+    name: "UniFi Wireless Presence",
     namespace: "xtreme22886",
     author: "xtreme",
-    description: "Use Unifi wireless clients as presence sensor",
+    description: "Use UniFi wireless clients as presence sensor",
     category: "My Apps",
     singleInstance: true,
     iconUrl: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg",
@@ -37,15 +37,15 @@ def mainPage() {
     dynamicPage(name: "mainPage", title: "", nextPage: null, uninstall: true, install: true) {
    	section(""){
             input name: "bridgeAddress", type: "text", title: "Bridge Address", required: true, description:"ex: 192.168.0.100:30000"
-            input name: "unifiAddress", type: "text", title: "Unifi Controller Address", required: true, description:"ex: 192.168.0.100:8443"
-            input name: "unifiUsername", type: "text", title: "Unifi Controller Username", required: true, description:"Username for the Unifi Controller"
-            input name: "unifiPassword", type: "password", title: "Unifi Controller Password", required: true, description:"Password for the Unifi Controller"
-            input name: "unifiSite", type: "text", title: "Unifi Controller Site", required: true, description:"Unifi 'site' where devices are"
+            input name: "unifiAddress", type: "text", title: "UniFi Controller Address", required: true, description:"ex: 192.168.0.100:8443"
+            input name: "unifiUsername", type: "text", title: "UniFi Controller Username", required: true, description:"Username for the UniFi Controller"
+            input name: "unifiPassword", type: "password", title: "UniFi Controller Password", required: true, description:"Password for the UniFi Controller"
+            input name: "unifiSite", type: "text", title: "UniFi Controller Site", required: true, description:"UniFi 'site' where devices are"
         }
         
         section() {
-            paragraph "View a list of Unifi wireless clients available for monitoring"
-          	href "unifiClientsPage", title: "Unifi Client List", description:""
+            paragraph "View a list of UniFi wireless clients available for monitoring"
+          	href "unifiClientsPage", title: "UniFi Client List", description:""
        	}
         
        	//section() {
@@ -98,7 +98,7 @@ def updated() {
         }
     }
 
-    sendToUnifiBridge()
+    sendToUniFiBridge()
 }
 
 def initialize() {
@@ -127,7 +127,7 @@ def initialize() {
 }
 
 def unifiClientsPage() {
-    log.debug "Getting list of Unifi wireless clients"
+    log.debug "Getting list of UniFi wireless clients"
     
     def options = [
      	"method": "GET",
@@ -141,7 +141,7 @@ def unifiClientsPage() {
     def myhubAction = new physicalgraph.device.HubAction(options, null, [callback: parseClients])
     sendHubCommand(myhubAction)
     
-    dynamicPage(name: "unifiClientsPage", title:"Unifi Wireless Clients", refreshInterval:5) {
+    dynamicPage(name: "unifiClientsPage", title:"UniFi Wireless Clients", refreshInterval:5) {
         section("") {
             input(name: "toMonitor", type: "enum", title: "Which client(s) to monitor?", options: state.unifiClients, multiple: true, required: false)
         }
@@ -159,8 +159,8 @@ def getLocationID() {
     return locationID
 }
 
-def sendToUnifiBridge() {
-    log.debug "Telling the Unifi Bridge to monitor the following device(s): ${toMonitor}"
+def sendToUniFiBridge() {
+    log.debug "Telling the UniFi Bridge to monitor the following device(s): ${toMonitor}"
        
     def options = [
      	"method": "POST",
@@ -178,11 +178,11 @@ def sendToUnifiBridge() {
 
 def renderConfig() {
     def configJson = new groovy.json.JsonOutput().toJson([
-        description: "Unifi Bridge API",
+        description: "UniFi Bridge API",
         platforms: [
             [
-                platform: "SmartThings Unifi Bridge",
-                name: "Unifi Bridge",
+                platform: "SmartThings UniFi Bridge",
+                name: "UniFi Bridge",
                 app_url: apiServerUrl("/api/smartapps/installations/"),
                 app_id: app.id,
                 access_token: state.accessToken
@@ -224,7 +224,7 @@ def addDevice(List toAdd) {
     log.debug "Adding device(s): ${toAdd}"
     def chlid = getChildDevice(dni)
     if (!child){
-        def dth = "Unifi Presence Sensor"
+        def dth = "UniFi Presence Sensor"
         toAdd.each{
             def mac = it.replaceAll(".*\\(|\\).*", "")
             def dni = "unifi-" + mac
