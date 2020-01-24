@@ -36,7 +36,7 @@ preferences {
 def mainPage() {
     dynamicPage(name: "mainPage", title: "", nextPage: null, uninstall: true, install: true) {
    	section(""){
-            input name: "bridgeAddress", type: "text", title: "Bridge Address", required: true, description:"ex: 192.168.0.100:30000"
+            input name: "bridgeAddress", type: "text", title: "Bridge Address", required: true, description:"ex: 192.168.0.100:9443"
             input name: "unifiAddress", type: "text", title: "UniFi Controller Address", required: true, description:"ex: 192.168.0.100:8443"
             input name: "unifiUsername", type: "text", title: "UniFi Controller Username", required: true, description:"UniFi Controller Username"
             input name: "unifiPassword", type: "password", title: "UniFi Controller Password", required: true, description:"UniFi Controller Password"
