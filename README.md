@@ -1,29 +1,28 @@
-# SmartThings <-> Unifi Presence Sensor
+# SmartThings <-> UniFi Presence Sensor
 
-**Integration for SmartThings to use Unifi wireless clients as presence sensors**
-
-This will allow you to select from a list of known Unifi wireless clients to monitor their presence. By selecting device(s) to monitor, a script will run every 5 seconds to check the Unifi controller's current status of the monitored device(s). If the device can't be seen by any Unifi Access Point, then the device is reported offline. A device is "offline" when it is not connected to an Unifi wireless network.
+**Integration for SmartThings to use UniFi wireless clients as presence sensors**
+This will allow you to select from a list of known UniFi wireless clients to monitor their presence. By selecting device(s) to monitor, a script will run every 5 seconds to check the UniFi controller's current status of the monitored device(s). If the device can't be seen by any UniFi Access Point, then the device is reported offline. A device is "offline" when it is not connected to an UniFi wireless network.
 
 ## Getting Started
 
-These instructions will help you get this solution implemented. I'm going to assume a working local Unifi Controller already exist on the network.
+These instructions will help you get this solution implemented. I'm going to assume a working local UniFi Controller already exist on the network.
 
 ### What are we going to be setting up / installing
 
 Here are the things that we will need to install / configure
 
-- Unifi Bridge (REST API server to facilitate communication between SmartThings and the Unifi Controller)
-  - This can be installed from [here](https://github.com/xtreme22886/SmartThings_Unifi-Presence-REST)
-- Unifi Wireless Presence (SmartThings SmartApp)
-- Unifi Presence Sensor (SmartThings Device Handler)
+- UniFi Bridge (REST API server to facilitate communication between SmartThings and the UniFi Controller)
+  - This can be installed from [here](https://github.com/xtreme22886/SmartThings_UniFi-Presence-REST)
+- UniFi Wireless Presence (SmartThings SmartApp)
+- UniFi Presence Sensor (SmartThings Device Handler)
 
 ## Installing SmartApp and Device Handler
-**First things first. Get the Unifi Bridge up and running before proceeding**
+**First things first. Get the UniFi Bridge up and running before proceeding**
 
 There are two ways you can install the SmartThings SmartApp and Device Handler.
 1. VIA the SmartThings IDE GitHub integration
    - Owner = xtreme22886
-   - Name = SmartThings_Unifi-Presence-Sensor
+   - Name = SmartThings_UniFi-Presence-Sensor
    - Branch = master
 2. VIA copying / pasting the code in the SmartThinge IDE
    - SmartApp = unifi-wireless-presence.groovy
@@ -38,15 +37,15 @@ Setup Steps:
    - Make sure to `Publish` this device handler
 3. In the **SmartThings Classic** mobile app
    - Automation > SmartApps > Add a SmartApp
-   - My Apps > Unifi Wireless Presence
-   - Enter in information for **Bridge Address**, **Unifi Controller Address**, **Unifi Controller Username**, **Unifi Controller Password** and **Unifi Controller Site**
+   - My Apps > UniFi Wireless Presence
+   - Enter in information for **Bridge Address**, **UniFi Controller Address**, **UniFi Controller Username**, **UniFi Controller Password** and **UniFi Controller Site**
 4. Click **Save** all the way out of the SmartApp
    
-**NOTE:** The **Unifi Controller Site** is **NOT** the *name* of the site but rather the *id* of the site. Take "https://x.x.x.x:8443/manage/site/default/dashboard" as an example; the *site id* is what is listed directly after **/site/**. In this cause, it would be **default**.
+**NOTE:** The **UniFi Controller Site** is **NOT** the *name* of the site but rather the *id* of the site. Take "https://x.x.x.x:8443/manage/site/default/dashboard" as an example; the *site id* is what is listed directly after **/site/**. In this cause, it would be **default**.
 
 After setup has been completed, we can begin to monitor device(s)
 1. Go back into the SmartApp
-2. Click on **Unifi Client List**
+2. Click on **UniFi Client List**
 3. Wait 5 seconds for the list of wireless clients to refresh and populate
 4. Click on `Tap to select`
 5. Select the device(s) you want to monitor
