@@ -1,5 +1,5 @@
 /**
- *  Unifi Presence Sensor
+ *  UniFi Presence Sensor
  *
  *  Copyright 2019 xtreme
  *
@@ -15,7 +15,7 @@
  */
 
 metadata {
-	definition (name: "Unifi Presence Sensor", namespace: "xtreme22886", author: "xtreme", ocfDeviceType: "x.com.st.d.mobile.presence") {
+	definition (name: "UniFi Presence Sensor", namespace: "xtreme22886", author: "xtreme", ocfDeviceType: "x.com.st.d.mobile.presence") {
 		capability "Presence Sensor"
 		capability "Sensor"
 	}
