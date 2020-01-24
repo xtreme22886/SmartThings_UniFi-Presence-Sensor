@@ -1,5 +1,5 @@
 /**
- *  UniFi WiFi Presence
+ *  UniFi Wireless Presence
  *
  *  Copyright 2020 xtreme
  *
@@ -44,7 +44,7 @@ def mainPage() {
         }
         
         section() {
-            paragraph "View a list of UniFi wireless clients available for monitoring"
+            paragraph "View a list of UniFi clients"
           	href "unifiClientsPage", title: "UniFi Client List", description:""
        	}
         
@@ -127,11 +127,11 @@ def initialize() {
 }
 
 def unifiClientsPage() {
-    log.debug "Getting list of UniFi wireless clients"
+    log.debug "Getting list of UniFi clients"
     
     def options = [
      	"method": "GET",
-        "path": "/wificlients",
+        "path": "/unificlients",
         "headers": [
             "HOST": settings.bridgeAddress,
             "Content-Type": "application/json"
@@ -141,9 +141,12 @@ def unifiClientsPage() {
     def myhubAction = new physicalgraph.device.HubAction(options, null, [callback: parseClients])
     sendHubCommand(myhubAction)
     
-    dynamicPage(name: "unifiClientsPage", title:"UniFi Wireless Clients", refreshInterval:5) {
+    dynamicPage(name: "unifiClientsPage", title:"UniFi Clients", refreshInterval:5) {
         section("") {
             input(name: "toMonitor", type: "enum", title: "Which client(s) to monitor?", options: state.unifiClients, multiple: true, required: false)
+	}
+	section("IMPORTANT NOTE") {
+            paragraph "The list above will show BOTH wired and wireless devices. However, this SmartApp only has the ability to monitor wireless devices. Please ensure you only select known wireless devices"
         }
     }
 }
