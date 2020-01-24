@@ -38,8 +38,8 @@ def mainPage() {
    	section(""){
             input name: "bridgeAddress", type: "text", title: "Bridge Address", required: true, description:"ex: 192.168.0.100:30000"
             input name: "unifiAddress", type: "text", title: "UniFi Controller Address", required: true, description:"ex: 192.168.0.100:8443"
-            input name: "unifiUsername", type: "text", title: "UniFi Controller Username", required: true, description:"Username for the UniFi Controller"
-            input name: "unifiPassword", type: "password", title: "UniFi Controller Password", required: true, description:"Password for the UniFi Controller"
+            input name: "unifiUsername", type: "text", title: "UniFi Controller Username", required: true, description:"UniFi Controller Username"
+            input name: "unifiPassword", type: "password", title: "UniFi Controller Password", required: true, description:"UniFi Controller Password"
             input name: "unifiSite", type: "text", title: "UniFi Controller Site", required: true, description:"UniFi 'site' where devices are"
         }
         
