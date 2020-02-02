@@ -27,7 +27,6 @@ definition(
     oauth: true
 )
 
-
 preferences {
 	page(name: "mainPage")
 	page(name: "unifiClientsPage")
@@ -41,13 +40,9 @@ def mainPage() {
             input name: "unifiUsername", type: "text", title: "UniFi Controller Username", required: true, description:"UniFi Controller Username"
             input name: "unifiPassword", type: "password", title: "UniFi Controller Password", required: true, description:"UniFi Controller Password"
             input name: "unifiSite", type: "text", title: "UniFi Controller Site", required: true, description:"UniFi 'site' where devices are"
+            href "unifiClientsPage", title: "View a list of UniFi clients", description:""
+            input name: "monitorGuest", type: "bool", title: "Enable to monitor hotspot clients", required: false, description:""
         }
-        
-        section() {
-            paragraph "View a list of UniFi clients"
-          	href "unifiClientsPage", title: "UniFi Client List", description:""
-       	}
-        
        	//section() {
             //paragraph "View this SmartApp's configuration to use it in other places"
             //href url:"${apiServerUrl("/api/smartapps/installations/${app.id}/config?access_token=${state.accessToken}")}", style:"embedded", required:false, title:"Config", description:"Tap, select, copy, then click back"
@@ -68,12 +63,19 @@ def installed() {
 def updated() {
     initialize()
 
-    settings.unifiPassword = "<password>"
+    settings.unifiPassword = "<redacted>"
     log.debug "Updated with settings: ${settings}"
-    
-    if(state.monitored) {
+    if (state.monitored) {
         def oldList = state.monitored
         def newList = toMonitor
+        if (settings.monitorGuest) {
+            if (newList) {
+                newList.add("unifi-guest")
+            } else {
+                newList = []
+                newList.add("unifi-guest")
+            }
+        }
         log.debug "Old list: ${oldList}"
         log.debug "New list: ${newList}"
         def toAdd = null
@@ -93,10 +95,18 @@ def updated() {
         state.monitored = newList
     } else {
         state.monitored = toMonitor
-        if (toMonitor) {
-            addDevice(toMonitor)
+        if (settings.monitorGuest) {
+            if (!state.monitored) {
+                state.monitored = []
+                state.monitored.add("unifi-guest")
+            }
+        }
+        if (state.monitored) {
+            addDevice(state.monitored)
         }
     }
+    
+    log.debug "toMonitor = $toMonitor"
 
     sendToUniFiBridge()
 }
@@ -114,11 +124,12 @@ def initialize() {
         "body":[
             "app_url":"${apiServerUrl}/api/smartapps/installations/",
             "app_id":app.id,
-            "access_token":state.accessToken,
-            "unifiAddress":settings.unifiAddress,
-            "unifiUsername":settings.unifiUsername,
-            "unifiPassword":settings.unifiPassword,
-            "unifiSite":settings.unifiSite.toLowerCase()
+            "access_token": state.accessToken,
+            "unifiAddress": settings.unifiAddress,
+            "unifiUsername": settings.unifiUsername,
+            "unifiPassword": settings.unifiPassword,
+            "unifiSite": settings.unifiSite.toLowerCase(),
+            "monitorGuest": settings.monitorGuest
         ]
     ]
     
@@ -163,7 +174,7 @@ def getLocationID() {
 }
 
 def sendToUniFiBridge() {
-    log.debug "Telling the UniFi Bridge to monitor the following device(s): ${toMonitor}"
+    log.debug "Telling the UniFi Bridge to monitor the following device(s): ${state.monitored}"
        
     def options = [
      	"method": "POST",
@@ -172,7 +183,7 @@ def sendToUniFiBridge() {
             "HOST": settings.bridgeAddress,
             "Content-Type": "application/json"
         ],
-        "body": ["toMonitor": toMonitor]
+        "body": ["toMonitor": state.monitored]
     ]
     
     def myhubAction = new physicalgraph.device.HubAction(options, null, [callback: null])
@@ -199,8 +210,8 @@ def renderConfig() {
 
 def getDeviceList() {
     log.debug "List device(s): ${toAdd}"
-    def list = getChildDevices();
-    def resultList = [];
+    def list = getChildDevices()
+    def resultList = []
     list.each { child ->
         log.debug "child device id $child.deviceNetworkId with label $child.label"
         def dni = child.deviceNetworkId
@@ -225,27 +236,38 @@ def updateDevice() {
 
 def addDevice(List toAdd) {
     log.debug "Adding device(s): ${toAdd}"
-    def chlid = getChildDevice(dni)
-    if (!child){
-        def dth = "UniFi Presence Sensor"
-        toAdd.each{
+    toAdd.each {
+        def dni
+        def name
+        if (it == "unifi-guest") {
+            dni = it
+            name = "Unifi Guest"
+        } else {
             def mac = it.replaceAll(".*\\(|\\).*", "")
-            def dni = "unifi-" + mac
-            def name = it
-            addChildDevice("xtreme22886", dth, dni, getLocationID(), ["label": name])    
+            dni = "unifi-" + mac
+            name = it
+        }
+        def child = getChildDevice(dni)
+        if (!child) {
+            addChildDevice("xtreme22886", "UniFi Presence Sensor", dni, getLocationID(), ["label": name])    
          }
     }
 }
 
 def deleteDevice(List toDelete) {
     log.debug "Deleting device(s): ${toDelete}"
-    def chlid = getChildDevice(dni)
-    if (!child) {
-        toDelete.each{
+    toDelete.each{
+        def dni
+        if (it == "unifi-guest") {
+            dni = it
+        } else {
             def mac = it.replaceAll(".*\\(|\\).*", "")
-            def dni = "unifi-" + mac
+            dni = "unifi-" + mac
+        }
+        def child = getChildDevice(dni)
+        if (child) {
             deleteChildDevice(dni)
-         }
+        }
     }
 }
 
