@@ -21,9 +21,9 @@ definition(
     description: "Use UniFi wireless clients as presence sensor",
     category: "My Apps",
     singleInstance: true,
-    iconUrl: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg",
-    iconX2Url: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg",
-    iconX3Url: "https://p7.hiclipart.com/preview/59/426/450/ubiquiti-networks-wireless-access-points-wi-fi-unifi-wifi.jpg",
+    iconUrl: "https://raw.githubusercontent.com/xtreme22886/SmartThings_UniFi-Presence-Sensor/master/ubiquiti.png",
+    iconX2Url: "https://raw.githubusercontent.com/xtreme22886/SmartThings_UniFi-Presence-Sensor/master/ubiquiti.png",
+    iconX3Url: "https://raw.githubusercontent.com/xtreme22886/SmartThings_UniFi-Presence-Sensor/master/ubiquiti.png",
     oauth: true
 )
 
