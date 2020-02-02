@@ -72,8 +72,7 @@ def updated() {
             if (newList) {
                 newList.add("unifi-guest")
             } else {
-                newList = []
-                newList.add("unifi-guest")
+                newList = ["unifi-guest"]
             }
         }
         log.debug "Old list: ${oldList}"
@@ -97,8 +96,7 @@ def updated() {
         state.monitored = toMonitor
         if (settings.monitorGuest) {
             if (!state.monitored) {
-                state.monitored = []
-                state.monitored.add("unifi-guest")
+                state.monitored = ["unifi-guest"]
             }
         }
         if (state.monitored) {
@@ -128,8 +126,7 @@ def initialize() {
             "unifiAddress": settings.unifiAddress,
             "unifiUsername": settings.unifiUsername,
             "unifiPassword": settings.unifiPassword,
-            "unifiSite": settings.unifiSite.toLowerCase(),
-            "monitorGuest": settings.monitorGuest
+            "unifiSite": settings.unifiSite.toLowerCase()
         ]
     ]
     
@@ -162,14 +159,17 @@ def unifiClientsPage() {
     }
 }
 
-    def parseClients(physicalgraph.device.HubResponse hubResponse) {
+def parseClients(physicalgraph.device.HubResponse hubResponse) {
     def msg = parseLanMessage(hubResponse.description)
     state.unifiClients = new groovy.json.JsonSlurper().parseText(msg.body)
 }
 
 def getLocationID() {
     def locationID = null
-    try{ locationID = location.hubs[0].id }catch(err){}
+    try {
+        locationID = location.hubs[0].id
+    } catch(err) { 
+    }
     return locationID
 }
 
@@ -209,17 +209,16 @@ def renderConfig() {
 }
 
 def getDeviceList() {
-    log.debug "List device(s): ${toAdd}"
     def list = getChildDevices()
+    log.debug "List of device(s): ${list}"
     def resultList = []
     list.each { child ->
-        log.debug "child device id $child.deviceNetworkId with label $child.label"
-        def dni = child.deviceNetworkId
-        resultList.push(dni)
+        def label = child.label
+        resultList.push(label)
     }
     
-    def configString = new groovy.json.JsonOutput().toJson("devices":resultList)
-    render contentType: "application/json", data: configString
+    def dataString = new groovy.json.JsonOutput().toJson("devices": resultList)
+    render contentType: "application/json", data: dataString
 }
 
 def updateDevice() {
@@ -230,8 +229,8 @@ def updateDevice() {
         chlid.setPresence(device.present)
     }
 	
-    def resultString = new groovy.json.JsonOutput().toJson("result":"success")
-    render contentType: "application/json", data: resultString
+    def dataString = new groovy.json.JsonOutput().toJson("result":"success")
+    render contentType: "application/json", data: dataString
 }
 
 def addDevice(List toAdd) {
