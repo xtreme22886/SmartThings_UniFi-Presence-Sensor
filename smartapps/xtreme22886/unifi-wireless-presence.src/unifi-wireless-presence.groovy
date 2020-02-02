@@ -241,7 +241,7 @@ def addDevice(List toAdd) {
         def name
         if (it == "unifi-guest") {
             dni = it
-            name = "Unifi Guest"
+            name = "UniFi Guest"
         } else {
             def mac = it.replaceAll(".*\\(|\\).*", "")
             dni = "unifi-" + mac
