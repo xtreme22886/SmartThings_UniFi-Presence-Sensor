@@ -3,6 +3,8 @@
 **Integration for SmartThings to use UniFi wireless clients as presence sensors**
 This will allow you to select from a list of known UniFi wireless clients to monitor their presence. By selecting device(s) to monitor, a script will run every 5 seconds to check the UniFi controller's current status of the monitored device(s). If the device can't be seen by any UniFi Access Point, then the device is reported offline. A device is "offline" when it is not connected to an UniFi wireless network.
 
+You can also monitor guest connected to a UniFi hotspot by enabling the guest option.
+
 ## Getting Started
 
 These instructions will help you get this solution implemented. I'm going to assume a working local UniFi Controller already exist on the network.
