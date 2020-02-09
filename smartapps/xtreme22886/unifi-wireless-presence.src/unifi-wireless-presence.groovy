@@ -40,6 +40,7 @@ def mainPage() {
             input name: "unifiUsername", type: "text", title: "UniFi Controller Username", required: true, description:"UniFi Controller Username"
             input name: "unifiPassword", type: "password", title: "UniFi Controller Password", required: true, description:"UniFi Controller Password"
             input name: "unifiSite", type: "text", title: "UniFi Controller Site", required: true, description:"UniFi 'site' where devices are"
+            input "offlineDelay", "number", title: "Seconds elapsed (1-300) since 'last_seen' to mark device offline", required: true, range: "1..300"
             href "unifiClientsPage", title: "View a list of UniFi clients", description:""
             input name: "monitorGuest", type: "bool", title: "Enable to monitor hotspot clients", required: false, description:""
         }
@@ -126,7 +127,8 @@ def initialize() {
             "unifiAddress": settings.unifiAddress,
             "unifiUsername": settings.unifiUsername,
             "unifiPassword": settings.unifiPassword,
-            "unifiSite": settings.unifiSite.toLowerCase()
+            "unifiSite": settings.unifiSite.toLowerCase(),
+            "offlineDelay": settings.offlineDelay
         ]
     ]
     
