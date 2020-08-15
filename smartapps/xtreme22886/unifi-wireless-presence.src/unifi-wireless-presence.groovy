@@ -153,7 +153,7 @@ def unifiClientsPage() {
     
     dynamicPage(name: "unifiClientsPage", title:"UniFi Clients", refreshInterval:5) {
         section("") {
-            input(name: "toMonitor", type: "enum", title: "Which client(s) to monitor?", options: state.unifiClients, multiple: true, required: false)
+            input(name: "toMonitor", type: "enum", title: "Tap to choose clients to monitor", options: state.unifiClients, multiple: true, required: false)
 	}
 	section("IMPORTANT NOTE") {
             paragraph "The list above will show BOTH wired and wireless devices. However, this SmartApp only has the ability to monitor wireless devices. Please ensure you only select known wireless devices."
