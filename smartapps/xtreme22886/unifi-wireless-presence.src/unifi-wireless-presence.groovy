@@ -52,13 +52,14 @@ def mainPage() {
 }
 
 def installed() {
-    log.debug "Installed with settings: ${settings}"
-    
     if (!state.accessToken) {
         createAccessToken()
     }
 
     initialize()
+
+    settings.unifiPassword = "<redacted>"
+    log.debug "Installed with settings: ${settings}"
 }
 
 def updated() {
