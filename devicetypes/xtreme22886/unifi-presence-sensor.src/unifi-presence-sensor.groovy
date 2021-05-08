@@ -30,17 +30,16 @@ metadata {
 	}
 }
 
-def setPresence(status) {	
-    if (status == false) {
-        status = "not present"
-    } else {
-        status = "present"
-    }
-    
-    def old = device.latestValue("presence")
-    
-    // Do nothing if already in that state
-    if ( old != status) {
-	sendEvent(displayed: true,  isStateChange: true, name: "presence", value: status, descriptionText: "$device.displayName is $status")
-    } 
+def setPresence(status) {
+	if (status == false) {
+		status = "not present"
+	} else {
+		status = "present"
+	}
+
+def old = device.latestValue("presence")
+	// Do nothing if already in that state
+	if ( old != status) {
+		sendEvent(displayed: true,  isStateChange: true, name: "presence", value: status, descriptionText: "$device.displayName is $status")
+	} 
 }
