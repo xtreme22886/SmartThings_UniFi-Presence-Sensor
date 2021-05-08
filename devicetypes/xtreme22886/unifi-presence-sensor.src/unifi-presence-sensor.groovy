@@ -15,7 +15,7 @@
  */
 
 metadata {
-	definition (name: "UniFi Presence Sensor", namespace: "xtreme22886", author: "xtreme", ocfDeviceType: "x.com.st.d.mobile.presence") {
+	definition (name: "UniFi Presence Sensor", namespace: "xtreme22886", author: "xtreme", ocfDeviceType: "x.com.st.d.sensor.presence") {
 		capability "Presence Sensor"
 		capability "Sensor"
 	}
