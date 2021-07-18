@@ -18,6 +18,7 @@ metadata {
 	definition (name: "UniFi Presence Sensor", namespace: "xtreme22886", author: "xtreme", ocfDeviceType: "x.com.st.d.sensor.presence") {
 		capability "Presence Sensor"
 		capability "Sensor"
+        command "setPresence"
 	}
 
 	tiles {
@@ -36,4 +37,5 @@ def setPresence(status) {
 	} else {
 		status = "present"
 	}
+    sendEvent(name: "presence", value: status)
 }
