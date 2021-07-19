@@ -37,5 +37,5 @@ def setPresence(status) {
 	} else {
 		status = "present"
 	}
-    sendEvent(name: "presence", value: status)
+	sendEvent(name: "presence", value: status)
 }
