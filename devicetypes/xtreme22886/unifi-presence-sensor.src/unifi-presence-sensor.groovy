@@ -37,10 +37,5 @@ def setPresence(status) {
 	} else {
 		status = "present"
 	}
+    sendEvent(name: "presence", value: status)
 }
-
-def old = device.latestValue("presence")
-	// Do nothing if already in that state
-	if ( old != status) {
-		sendEvent(displayed: true,  isStateChange: true, name: "presence", value: status, descriptionText: "$device.displayName is $status")
-	} 
