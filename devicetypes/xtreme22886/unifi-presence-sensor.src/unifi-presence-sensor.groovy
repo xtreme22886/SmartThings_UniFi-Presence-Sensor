@@ -18,6 +18,7 @@ metadata {
 	definition (name: "UniFi Presence Sensor", namespace: "xtreme22886", author: "xtreme", ocfDeviceType: "x.com.st.d.sensor.presence") {
 		capability "Presence Sensor"
 		capability "Sensor"
+		command "setPresence"
 	}
 
 	tiles {
@@ -37,3 +38,9 @@ def setPresence(status) {
 		status = "present"
 	}
 }
+
+def old = device.latestValue("presence")
+	// Do nothing if already in that state
+	if ( old != status) {
+		sendEvent(displayed: true,  isStateChange: true, name: "presence", value: status, descriptionText: "$device.displayName is $status")
+	} 
